@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TailwindCSS</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+
+        .open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <header class="w-full flex justify-between items-center bg-blue-500 text-white text-xl">
+        <h1 class="text-5xl pl-8">Logo</h1>
+        <ul class="flex items-center hidden lg:flex">
+            <li class="py-4 px-8 hover:bg-white hover:text-blue-500 cursor-pointer duration-300">Home</li>
+            <li class="py-4 px-8 hover:bg-white hover:text-blue-500 cursor-pointer duration-300">About</li>
+            <li class="py-4 px-8 hover:bg-white hover:text-blue-500 cursor-pointer duration-300">Service</li>
+            <li class="py-4 px-8 hover:bg-white hover:text-blue-500 cursor-pointer duration-300">Contact</li>
+        </ul>
+
+        <div id="btn" class="flex flex-col lg:hidden justify-between h-9  mx-8 my-4 border border-white rounded-lg cursor-pointer p-2">
+            <span class="w-6 h-px bg-white"></span>
+            <span class="w-6 h-px bg-white"></span>
+            <span class="w-6 h-px bg-white"></span>
+        </div>
+    </header>
+
+    <main class="mt-5">
+        <div class="container mx-auto grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 px-4">
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+            <div class="bg-blue-200 h-64 border-4 rounded-xl border-blue-500"></div>
+        </div>
+    </main>
+
+    <footer class="flex text-xl text-white mt-8 bg-blue-500 justify-center items-center py-4">
+        <h1>2021 он</h1>
+    </footer>
+
+
+    <div id="menu" class="w-80 duration-500 top-0 right-0 transform translate-x-full h-screen bg-blue-500 absolute flex justify-end text-white">
+        <h1 id="close" class="px-8 py-4 cursor-pointer text-6xl">&times;</h1>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

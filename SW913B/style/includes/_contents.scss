@@ -1,0 +1,25 @@
+.contents {
+    position: absolute;
+    width: 100%;
+    top: 82%;
+    color: $white;
+    .row {
+        width: 95%;
+        margin: auto;
+        &__title {
+            margin-bottom: .6rem;
+        }
+
+        &__contents {
+            width: 100%;
+            @include flexItems(row, space-between);
+            margin-bottom: 2rem;
+            .box {
+                width: 32%;
+                height: 168.5px;
+                border-radius: $bradius;
+                background-color: $buttonColor;
+            }
+        }
+    }
+}
