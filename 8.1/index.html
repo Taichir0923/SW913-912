@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="modalContainer z-10 w-full h-screen fixed top-0 left-0 bg-black bg-opacity-30 hidden justify-center items-center">
+        <div class="modal flex w-2/5 flex-col justify-between bg-white rounded-2xl overflow-hidden">
+            <div class="modal__header border-b border-gray-300 flex items-center justify-between">
+                <h1 class="text-3xl font-bold pl-4">Modal title</h1>
+                <button id="close" class="text-3xl transition duration-300 hover:bg-indigo-500 hover:text-white py-4 px-6">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <img class="w-full" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2020%2F10%2F12%2Fkitten-with-toy-151138791-2000.jpg&q=85" alt="">
+            </div>
+            <div class="modal__footer border-t border-gray-300 flex items-center py-2 px-6 justify-end">
+                <button id="btn__close" class="py-3 px-8 font-bold rounded-xl bg-indigo-500 text-white">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- <div class="h-64 rounded-xl overflow-hidden bg-cover bg-center" style="background-image: url();"></div> -->
+    </div>
+
+    <div class="fixed right-4 bottom-4 flex items-center">
+        <input id="input" class="py-2 px-4 rounded-l-full border border-indigo-500" type="text" placeholder="Insert photo">
+        <button class="btn py-2 px-4 rounded-r-full bg-indigo-500 text-white font-bold border border-indigo-500">Create Box</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
