@@ -31,7 +31,9 @@ const checkPass = document.querySelectorAll('.checkPass');
 
 const mains = document.querySelectorAll('.main');
 
-let isValidPassword, isValidForm, passwordMatched
+let isValidPassword, isValidForm, passwordMatched;
+
+let users = [];
 
 class User {
     constructor(fullname, email, number, dob, avatar, address, password){
@@ -99,10 +101,56 @@ register.addEventListener('click', e => {
     e.preventDefault();
     checkForm();
     if(passwordMatched && isValidPassword && isValidForm){
+        let existingUser = users.find(el => el.email === email.value);
+        let existingNumber = users.find(el => el.number === number.value);
+        if(existingUser){
+            swal({
+                title: "Алдаа гарлаа",
+                text: "Бүртгэлтэй имэйл байна...",
+                icon: "error" // warning, error, success
+            })
+            return
+        } 
+        
+        if(existingNumber){
+            swal({
+                title: "Алдаа гарлаа",
+                text: "Бүртгэлтэй дугаар байна...",
+                icon: "error" // warning, error, success
+            })
+            return
+        }
+
         const user = new User(fullname.value, email.value, number.value, dob.value, avatar.value, address.value, password.value);
-        console.log(user);
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+        resetForm()
+
+        swal({
+            title: "Амжилттай бүртгэгдлээ",
+            icon: "success" // warning, error, success
+        })
     }
 })
+
+function resetForm(){
+    fullname.value = '';
+    email.value = '';
+    number.value = null;
+    avatar.value = '';
+    dob.value = null;
+    address.value = '';
+    password.value = '';
+    passwordConfirm.value = '';
+}
+
+function getDataFromLocal(){
+    if(localStorage['users']){
+        users = JSON.parse(localStorage['users'])
+    }
+}
+
+getDataFromLocal()
 
 // Массив дотор хэрэглэгчийн датаг хадгалах.
 // LocalStorage судлаад, дотор нь хэрэглэгчдийн датаг хадгалах.
