@@ -75,7 +75,7 @@
         const articleContainer = document.querySelector('#articleContainer');
         const commentContainer = document.querySelector('#commentContainer')
 
-        let article, formValid, user, users;
+        let article, formValid, user, users, replies;
         
         function init(){
             if(localStorage['currentArticle']){
@@ -94,6 +94,12 @@
                 comments = JSON.parse(localStorage['comments'])
             } else {
                 comments = [];
+            }
+
+            if(localStorage['replies']){
+                replies = JSON.parse(localStorage['replies'])
+            } else {
+                replies = [];
             }
 
             displayArticle(article);
@@ -134,12 +140,14 @@
                             <h1 class="font-bold text-gray-700">${commentUser.fullname}</h1>
                             <div class="rounded-xl bg-gray-200 w-full p-4">
                                 <p>${comm.text}</p>
+                                <input value="${comm.id}" hidden>
                             </div>
                             <div class="flex text-xs">
                                 <p class="font-bold mr-2 cursor-pointer text-blue-500">Like</p>
-                                <p class="font-bold mr-2 cursor-pointer text-blue-500">Reply</p>
+                                <p id="reply" class="font-bold mr-2 cursor-pointer text-blue-500">Reply</p>
                                 <p class="font-bold text-gray-600">${comm.created.date}, ${comm.created.time}</p>
                             </div>
+                            <input value="${comm.id}" hidden>
                         </div>
                     </div>
                 `)
@@ -161,6 +169,19 @@
             }
         }
 
+        class Reply {
+            constructor(text, userId, commentId){
+                this.text = text;
+                this.userId = userId;
+                this.commentId = commentId;
+                this.created = {
+                    date: new Date().toLocaleDateString(),
+                    time: new Date().toLocaleTimeString()
+                };
+                this.id = +Math.random().toString().split('.')[1];
+            }
+        }
+
         writeComment.addEventListener('click', e => {
             e.preventDefault();
             checkForm(commentInput.value !== "");
@@ -168,7 +189,7 @@
                 const comment = new Comment(commentInput.value, user.id, article.id);
                 comments.push(comment);
                 localStorage.setItem('comments', JSON.stringify(comments));
-                resetForm();
+                resetForm(commentInput);
                 displayComments(comments);
             }
         });
@@ -185,9 +206,54 @@
             }
         }
 
-        function resetForm(){
-            commentInput.value = ''
+        function resetForm(input){
+            input.value = ''
         }
+
+        document.addEventListener('click', e => {
+            if(e.target.id === "reply"){
+                if(e.target.parentNode.nextElementSibling.classList.contains('bgaa')){
+                    e.target.parentNode.nextElementSibling.remove();
+                }
+                e.target.parentNode.insertAdjacentHTML('afterend', `
+                    <div class="w-full flex bgaa flex-col mt-2">
+                        <div class="w-full flex items-center">
+                            <input class="bg-gray-200 w-full focus:outline-none py-3 px-4 rounded-l-3xl" placeholder="Сэтгэгдэлд хариу бичих" id="replyInput" type="text">
+                            <button id="writeReply" class="bg-gray-200 text-gray-700 rounded-r-3xl py-3 px-4">
+                                <i id="writeReplyIcon" class="far fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                `)
+            }
+
+            if(e.target.id === "writeReply" || e.target.id === "writeReplyIcon"){
+                if(e.target.id === "writeReplyIcon"){
+                    checkForm(e.target.parentNode.previousElementSibling.value !== "");
+                    if(formValid){
+                        const currentComment = comments.find(comment => comment.id === +e.target.parentNode.parentNode.parentNode.nextElementSibling.value);
+                        console.log(currentComment)
+                        const reply = new Reply(e.target.parentNode.previousElementSibling.value, user.id, currentComment.id);
+                        replies.push(reply);
+                        localStorage.setItem('replies', JSON.stringify(replies))
+                        resetForm(e.target.parentNode.previousElementSibling)
+                        e.target.parentNode.parentNode.parentNode.remove()
+                    }
+                    
+                } else {
+                    checkForm(e.target.previousElementSibling.value !== "")
+                    if(formValid){
+                        const currentComment1 = comments.find(comment => comment.id === +e.target.parentNode.parentNode.nextElementSibling.value);
+                        console.log(currentComment1)
+                        const reply1 = new Reply(e.target.previousElementSibling.value, user.id, currentComment1.id)
+                        replies.push(reply1)
+                        localStorage.setItem('replies', JSON.stringify(replies))
+                        resetForm(e.target.previousElementSibling)
+                        e.target.parentNode.parentNode.remove()
+                    }
+                }
+            }
+        })
     </script>
 </body>
 </html>
