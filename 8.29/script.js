@@ -46,4 +46,14 @@ fetch('./data/users.json')
 .then(res => res.json())
 .then(result => {
     console.log(result)
-});
+})
+.catch(err => console.log(err));
+// Async Await
+
+async function getData(){
+    const response = await fetch('https://randomuser.me/api/?results=50');
+    
+    const data = await response.json();
+
+    console.log(data)
+}
