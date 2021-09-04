@@ -47,7 +47,7 @@ canvas.height = 500;
 let x = canvas.width/2;
 let y = canvas.height/2;
 let xspeed = 10;
-let yspeed = 15;
+let yspeed = 5;
 const radius = 50
 
 // const second = 0
